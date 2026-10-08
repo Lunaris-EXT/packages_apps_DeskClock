@@ -45,7 +45,6 @@ import com.android.deskclock.DropShadowController;
 import com.android.deskclock.R;
 import com.android.deskclock.Utils;
 import com.android.deskclock.actionbarmenu.MenuItemController;
-import com.android.deskclock.actionbarmenu.MenuItemControllerFactory;
 import com.android.deskclock.actionbarmenu.NavUpMenuItemController;
 import com.android.deskclock.actionbarmenu.OptionsMenuManager;
 import com.android.deskclock.actionbarmenu.SearchMenuItemController;
@@ -129,9 +128,7 @@ public final class CitySelectionActivity extends BaseActivity {
         mOptionsMenuManager.addMenuItemController(new NavUpMenuItemController(this))
                 .addMenuItemController(mSearchMenuItemController)
                 .addMenuItemController(new SortOrderMenuItemController())
-                .addMenuItemController(new SettingsMenuItemController(this))
-                .addMenuItemController(MenuItemControllerFactory.getInstance()
-                        .buildMenuItemControllers(this));
+                .addMenuItemController(new SettingsMenuItemController(this, false));
         mCitiesList = findViewById(R.id.cities_list);
         mCitiesList.setAdapter(mCitiesAdapter);
 
@@ -620,11 +617,9 @@ public final class CitySelectionActivity extends BaseActivity {
 
     private final class SortOrderMenuItemController implements MenuItemController {
 
-        private static final int SORT_MENU_RES_ID = R.id.menu_item_sort;
-
         @Override
         public int getId() {
-            return SORT_MENU_RES_ID;
+            return R.id.menu_item_sort;
         }
 
         @Override
